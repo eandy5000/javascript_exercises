@@ -1,0 +1,1 @@
+{"version":3,"sources":["exercises/index.js","index.js"],"names":["console","log"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAAA,QAAQC,GAAR,CAAY,UAAZ;;;;ACAA","file":"index.map","sourcesContent":["console.log(\"exercise\");\n","import \"./exercises\";\n"]}
