@@ -71,58 +71,62 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({11:[function(require,module,exports) {
-console.log("es5 class");
-
-// parent constructor
-function Shape(color) {
-  this.color = color;
-}
-
-//parent method
-Shape.prototype.draw = function () {
-  console.log("draw");
+})({13:[function(require,module,exports) {
+console.log("mixin");
+//mixin for composition
+var sleep = {
+  sleep: function sleep() {
+    console.log("sleep");
+  }
 };
 
-// child method
-function Circle(radius, color) {
-  // parent constructor
-  Shape.call(this, color);
-  this.radius = radius;
-}
-
-// extends shape to circle
-Circle.prototype = Object.create(Shape.prototype);
-Circle.prototype.constructor = Circle;
-
-Circle.prototype.duplicate = function () {
-  console.log("duplicate");
+var walk = {
+  walk: function walk() {
+    console.log("walk");
+  }
 };
 
-function Oval(color) {
-  Shape.call(this, color);
-}
-Oval.prototype = Object.create(Shape.prototype);
-Oval.prototype.constructor = Oval;
-
-//override parent method
-Oval.prototype.draw = function () {
-  Shape.prototype.draw();
-  console.log("oval");
+var swim = {
+  swim: function swim() {
+    console.log("swim");
+  }
 };
 
-var sh = new Shape("red");
-var c = new Circle(1, "blue");
-var o = new Oval("green");
+function Animal() {}
 
-console.log(sh, sh.draw());
-console.log(c, c.draw());
-console.log(o, o.draw());
+Animal.prototype.eat = function () {
+  console.log("eating...");
+};
+
+function Dog() {}
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+
+Dog.prototype.bark = function () {
+  console.log("bark");
+};
+// dog mixin
+Object.assign(Dog.prototype, sleep, walk);
+
+function Fish() {}
+Fish.prototype = Object.create(Animal.prototype);
+Fish.prototype.constructor = Fish;
+
+// fish mixin
+Object.assign(Fish.prototype, sleep, swim);
+
+var a = new Animal();
+var d = new Dog();
+var f = new Fish();
+
+// console.log(a, a.eat());
+//console.log(d.sleep());
+console.log(f.sleep());
 },{}],2:[function(require,module,exports) {
 "use strict";
 
-require("./exercises/es5_class");
-},{"./exercises/es5_class":11}],10:[function(require,module,exports) {
+require("./exercises/es5_mixin");
+},{"./exercises/es5_mixin":13}],10:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;

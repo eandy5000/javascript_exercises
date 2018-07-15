@@ -1,1 +1,1 @@
-import "./exercises/es5_class";
+import "./exercises/es5_mixin";

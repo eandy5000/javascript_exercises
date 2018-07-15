@@ -33,6 +33,7 @@ Oval.prototype.constructor = Oval;
 
 //override parent method
 Oval.prototype.draw = function() {
+  // call parent method
   Shape.prototype.draw();
   console.log("oval");
 };
