@@ -1,1 +1,3 @@
-import "./exercises/es5_mixin";
+"use strict";
+
+import "./exercises/trampolineRecursion";

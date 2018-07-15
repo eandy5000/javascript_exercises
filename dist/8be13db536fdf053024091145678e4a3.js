@@ -71,62 +71,34 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({13:[function(require,module,exports) {
-console.log("mixin");
-//mixin for composition
-var sleep = {
-  sleep: function sleep() {
-    console.log("sleep");
-  }
-};
+})({16:[function(require,module,exports) {
+//7-15-18
+// looks like tail call optimization isn't
+// supported in browsers or node without flags
+console.log("trampoline recursion");
 
-var walk = {
-  walk: function walk() {
-    console.log("walk");
-  }
-};
+// const trampCountdown = num => {
+//   const base = 1;
+//   console.log(num);
+//   return num <= base ? base : trampCountdown.bind(null, num - 1);
+// };
 
-var swim = {
-  swim: function swim() {
-    console.log("swim");
-  }
-};
+// trampCountdown(10);
 
-function Animal() {}
+// const trampFact = num => {
+//   return num <= 0
+//     ? 1
+//     : () => {
+//         return num * trampFact(num - 1);
+//       };
+// };
 
-Animal.prototype.eat = function () {
-  console.log("eating...");
-};
-
-function Dog() {}
-Dog.prototype = Object.create(Animal.prototype);
-Dog.prototype.constructor = Dog;
-
-Dog.prototype.bark = function () {
-  console.log("bark");
-};
-// dog mixin
-Object.assign(Dog.prototype, sleep, walk);
-
-function Fish() {}
-Fish.prototype = Object.create(Animal.prototype);
-Fish.prototype.constructor = Fish;
-
-// fish mixin
-Object.assign(Fish.prototype, sleep, swim);
-
-var a = new Animal();
-var d = new Dog();
-var f = new Fish();
-
-// console.log(a, a.eat());
-//console.log(d.sleep());
-console.log(f.sleep());
+// console.log(trampFact(6));
 },{}],2:[function(require,module,exports) {
 "use strict";
 
-require("./exercises/es5_mixin");
-},{"./exercises/es5_mixin":13}],10:[function(require,module,exports) {
+require("./exercises/trampolineRecursion");
+},{"./exercises/trampolineRecursion":16}],17:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -249,5 +221,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[10,2])
+},{}]},{},[17,2])
 //# sourceMappingURL=/dist/8be13db536fdf053024091145678e4a3.map
