@@ -71,34 +71,13 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({16:[function(require,module,exports) {
-//7-15-18
-// looks like tail call optimization isn't
-// supported in browsers or node without flags
-console.log("trampoline recursion");
-
-// const trampCountdown = num => {
-//   const base = 1;
-//   console.log(num);
-//   return num <= base ? base : trampCountdown.bind(null, num - 1);
-// };
-
-// trampCountdown(10);
-
-// const trampFact = num => {
-//   return num <= 0
-//     ? 1
-//     : () => {
-//         return num * trampFact(num - 1);
-//       };
-// };
-
-// console.log(trampFact(6));
+})({12:[function(require,module,exports) {
+console.log("hi");
 },{}],2:[function(require,module,exports) {
 "use strict";
 
-require("./exercises/trampolineRecursion");
-},{"./exercises/trampolineRecursion":16}],17:[function(require,module,exports) {
+require("./exercises/practice");
+},{"./exercises/practice":12}],11:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -120,7 +99,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56338' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51175' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -221,5 +200,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[17,2])
+},{}]},{},[11,2])
 //# sourceMappingURL=/dist/8be13db536fdf053024091145678e4a3.map

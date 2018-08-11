@@ -1,3 +1,3 @@
 "use strict";
 
-import "./exercises/trampolineRecursion";
+import "./exercises/practice";

@@ -1,22 +1,43 @@
-//7-15-18
-// looks like tail call optimization isn't
-// supported in browsers or node without flags
-console.log("trampoline recursion");
+const tramp = (fn = (...args) => {
+  let result = fn(...args);
 
-// const trampCountdown = num => {
-//   const base = 1;
-//   console.log(num);
-//   return num <= base ? base : trampCountdown.bind(null, num - 1);
-// };
+  while (typeof result === "function") {
+    result = result();
+  }
 
-// trampCountdown(10);
+  return result;
+});
 
-// const trampFact = num => {
-//   return num <= 0
-//     ? 1
-//     : () => {
-//         return num * trampFact(num - 1);
-//       };
-// };
+const sumB = (num, sum = 0) => {
+  return num === 0 ? sum : () => sumB(num - 1, sum + num);
+};
 
-// console.log(trampFact(6));
+const trampSum = trampoline(sumB);
+
+console.log("new syntax", trampSum(100000));
+console.log("without trampoline sumB(3)()()()", sumB(3)()()());
+
+const trampolineSum = trampoline(sumBelow);
+console.log("old style ", trampolineSum(100000));
+
+function sumBelow(num, sum = 0) {
+  if (num === 0) {
+    return sum;
+  } else {
+    return function() {
+      return sumBelow(num - 1, sum + num);
+    };
+  }
+}
+
+function trampoline(fn) {
+  return function(...args) {
+    let result = fn(...args);
+
+    while (typeof result === "function") {
+      result = result();
+    }
+
+    return result;
+  };
+}
