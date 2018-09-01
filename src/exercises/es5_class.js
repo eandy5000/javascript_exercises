@@ -1,47 +1,53 @@
-console.log("es5 class");
-
-// parent constructor
-function Shape(color) {
-  this.color = color;
+console.log("hi");
+//parent
+function Animal(skin, health) {
+  this.skin = skin;
+  this.health = health;
 }
 
-//parent method
-Shape.prototype.draw = function() {
-  console.log("draw");
+Animal.prototype = {
+  eat() {
+    this.health++;
+    console.log("eat ", this.health);
+  },
+  sleep() {
+    this.health++;
+    console.log("rest ", this.health);
+  }
 };
 
-// child method
-function Circle(radius, color) {
-  // parent constructor
-  Shape.call(this, color);
-  this.radius = radius;
+function Dog(name, health) {
+  const coat = "fur";
+  Animal.call(this, coat, health);
+  this.name = name;
 }
 
-// extends shape to circle
-Circle.prototype = Object.create(Shape.prototype);
-Circle.prototype.constructor = Circle;
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
 
-Circle.prototype.duplicate = function() {
-  console.log("duplicate");
+Dog.prototype.bark = function() {
+  console.log("arrff arrff arrff");
 };
 
-function Oval(color) {
-  Shape.call(this, color);
-}
-Oval.prototype = Object.create(Shape.prototype);
-Oval.prototype.constructor = Oval;
-
-//override parent method
-Oval.prototype.draw = function() {
-  // call parent method
-  Shape.prototype.draw();
-  console.log("oval");
+Dog.prototype.eat = function() {
+  this.health++;
+  console.log("chomp chomp ", this.health);
 };
 
-const sh = new Shape("red");
-const c = new Circle(1, "blue");
-const o = new Oval("green");
+Dog.prototype.eatChomp = function() {
+  console.log("chomping and eating");
+  Animal.prototype.eat.call(this);
+  this.eat();
+};
 
-console.log(sh, sh.draw());
-console.log(c, c.draw());
-console.log(o, o.draw());
+const a = new Animal("fur", 12);
+const d = new Dog("George", 8);
+
+console.log(a);
+a.eat();
+
+console.log(d);
+d.eat();
+d.sleep();
+d.bark();
+d.eatChomp();
